@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TaskMaster</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Task List</h1>
+    <a href="/add">Add Task</a>
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {% if task.completed %}<s>{{ task.title }}</s>{% else %}{{ task.title }}{% endif %}
+            <a href="/edit/{{ task.id }}">Edit</a>
+            <a href="/delete/{{ task.id }}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
+
+# ================================
+# templates/add_task.html
+
+<!DOCTYPE html>
+<html>
+<head><title>Add Task</title></head>
+<body>
+    <h1>Add a New Task</h1>
+    <form method="POST">
+        <input name="title" placeholder="Task Title" required>
+        <button type="submit">Add</button>
+    </form>
+    <a href="/">Back</a>
+</body>
+</html>
+
+
+# ================================
+# templates/edit_task.html
+
+<!DOCTYPE html>
+<html>
+<head><title>Edit Task</title></head>
+<body>
+    <h1>Edit Task</h1>
+    <form method="POST">
+        <input name="title" value="{{ task.title }}" required>
+        <label><input type="checkbox" name="completed" {% if task.completed %}checked{% endif %}> Completed</label>
+        <button type="submit">Update</button>
+    </form>
+    <a href="/">Back</a>
+</body>
+</html>
+
+
+# ================================
+# static/styles.css
+
+body {
+    font-family: Arial;
+    margin: 20px;
+}
+
+h1 {
+    color: #444;
+}
+
+a {
+    margin-left: 10px;
+    color: blue;
+}
+
+
